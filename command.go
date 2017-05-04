@@ -1,14 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"os"
 )
 
-func main() {
+var err = 0
+
+func command() {
 	if len(os.Args) != 2 {
-		fmt.Println("m3uspiff takes exactly ONE argument \n")
-		os.Exit(1)
+		err = 1
 	}
-	print()
 }
