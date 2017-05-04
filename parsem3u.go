@@ -2,13 +2,18 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
+	"strings"
 )
 
 func parsem3u(file *os.File) {
 	read := bufio.NewScanner(file)
 	for read.Scan() {
-		fmt.Println(read.Text())
+		var line = read.Text()
+		if line != "" {
+			if !strings.HasPrefix(line, "#") {
+				lookupargs(line)
+			}
+		}
 	}
 }
