@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"os"
 )
@@ -13,8 +12,7 @@ func main() {
 
 func argcheck() {
 	if len(os.Args) != 2 {
-		err := errors.New("m3uspiff takes exactly ONE argument \n")
-		fmt.Print(err)
+		fmt.Println("m3uspiff takes exactly ONE argument \n")
 		os.Exit(1)
 	}
 }
