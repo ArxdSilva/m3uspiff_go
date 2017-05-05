@@ -6,14 +6,17 @@ import (
 	"strings"
 )
 
+var lines = make([]string, 0)
+
 func parsem3u(file *os.File) {
 	read := bufio.NewScanner(file)
 	for read.Scan() {
-		var line = read.Text()
+		line := read.Text()
 		if line != "" {
 			if !strings.HasPrefix(line, "#") {
-				lookupargs(line)
+				lines = append(lines, line)
 			}
 		}
 	}
+	return
 }
