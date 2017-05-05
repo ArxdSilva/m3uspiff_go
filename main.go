@@ -25,6 +25,7 @@ func main() {
 	for _, line := range lines {
 		lookupargs(line)
 	}
+
 	//makexml()
 	//print()
 }
