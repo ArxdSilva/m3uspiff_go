@@ -3,7 +3,7 @@
 [![codebeat badge](https://codebeat.co/badges/0e4adbee-bafe-4e6c-b72c-a7ae645e4372)](https://codebeat.co/projects/github-com-ibrokemypie-m3uspiff_go-master)
 [![Build Status](https://travis-ci.org/ibrokemypie/m3uspiff_go.svg?branch=master)](https://travis-ci.org/ibrokemypie/m3uspiff_go)
 [![codecov](https://codecov.io/gh/ibrokemypie/m3uspiff_go/branch/master/graph/badge.svg)](https://codecov.io/gh/ibrokemypie/m3uspiff_go)
-[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 An M3U to XSPF playlist converter.
 
