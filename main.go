@@ -38,8 +38,16 @@ func main() {
 		m3u.Lookupargs(line, err, bigmap)
 	}
 
+	if err != nil {
+		println(err)
+	}
+
 	for _, tags := range bigmap {
 		xspf.Makexml(tags)
+	}
+
+	if err != nil {
+		println(err)
 	}
 }
 
