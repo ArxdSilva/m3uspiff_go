@@ -1,4 +1,4 @@
-package main
+package m3u
 
 import (
 	"bufio"
@@ -6,9 +6,9 @@ import (
 	"strings"
 )
 
-var lines = make([]string, 0)
+var Lines = make([]string, 0)
 
-func parsem3u(file *os.File) {
+func Parsem3u(file *os.File) {
 	read := bufio.NewScanner(file)
 	for read.Scan() {
 		line := read.Text()
@@ -18,7 +18,7 @@ func parsem3u(file *os.File) {
 		if strings.HasPrefix(line, "#") {
 			continue
 		}
-		lines = append(lines, line)
+		Lines = append(Lines, line)
 	}
 	return
 }

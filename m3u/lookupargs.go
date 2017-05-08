@@ -1,4 +1,4 @@
-package main
+package m3u
 
 import (
 	"github.com/dhowden/tag"
@@ -8,7 +8,7 @@ import (
 
 var entries = 0
 
-func lookupargs(line string) {
+func Lookupargs(line string, err error, bigmap map[string]map[string]string) {
 	tags := make(map[string]string)
 	tags["entry"] = strconv.Itoa(entries)
 	tags["location"] = line
@@ -21,7 +21,7 @@ func lookupargs(line string) {
 		} else {
 			err = err2
 		}
-		end(tags)
+		end(tags, bigmap)
 		return
 	}
 
@@ -35,10 +35,10 @@ func lookupargs(line string) {
 	tags["title"] = title
 	tags["trackNum"] = strconv.Itoa(track)
 
-	end(tags)
+	end(tags, bigmap)
 }
 
-func end(tags map[string]string) {
+func end(tags map[string]string, bigmap map[string]map[string]string) {
 	bigmap[strconv.Itoa(entries)] = tags
 	entries++
 	return

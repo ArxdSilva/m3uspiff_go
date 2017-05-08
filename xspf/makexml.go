@@ -1,10 +1,10 @@
-package main
+package xspf
 
 import (
 	//"encoding/xml"
 	"fmt"
 )
 
-func makexml(tags map[string]string) {
+func Makexml(tags map[string]string) {
 	fmt.Println(tags)
 }
