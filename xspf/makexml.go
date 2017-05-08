@@ -1,9 +1,11 @@
 package xspf
 
 import (
+	"bytes"
 	"encoding/xml"
-	"fmt"
 )
+
+var Output bytes.Buffer
 
 func Makexml(tags map[string]string) {
 	type track struct {
@@ -14,24 +16,20 @@ func Makexml(tags map[string]string) {
 		Album    string `xml:"album,omitempty"`
 	}
 
-	v := &track{
+	values := &track{
 		Location: tags["location"],
 		Title:    tags["title"],
 		TrackNum: tags["trackNum"],
 		Creator:  tags["creator"],
 		Album:    tags["album"],
 	}
+	Output.WriteString("\n")
+	newoutput, _ := xml.MarshalIndent(values, "  ", "    ")
+	Output.Write(newoutput)
+	//Output = (Output + newoutput)
 
-	output, err := xml.MarshalIndent(v, "  ", "    ")
-	if err != nil {
-		fmt.Printf("error: %v\n", err)
-	}
+	//(Output, _ = xml.MarshalIndent(values, "  ", "    "))
 
-	fmt.Println(string(output))
+	return
+	//fmt.Println(string(output))
 }
-
-//func Makexml(tags map[string]string) {
-//fmt.Println(tags)
-//xml.Marshaler
-//output, err := xml.MarshalIndent(data, "", "  ")
-//}

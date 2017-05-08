@@ -47,8 +47,10 @@ func main() {
 	}
 
 	if err != nil {
-		println(err)
+		errorh(err)
 	}
+
+	fmt.Println(xspf.Output.String())
 }
 
 func errorh(err error) {
