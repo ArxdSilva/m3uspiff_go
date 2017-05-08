@@ -5,6 +5,6 @@ import (
 	"fmt"
 )
 
-func makexml(tags string) {
+func makexml(tags map[string]string) {
 	fmt.Println(tags)
 }

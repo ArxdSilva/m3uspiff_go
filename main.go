@@ -5,6 +5,8 @@ import (
 	"os"
 )
 
+var bigmap = make(map[string]map[string]string)
+
 func main() {
 
 	command()
@@ -23,11 +25,7 @@ func main() {
 		lookupargs(line)
 	}
 
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	for _, tags := range tags {
+	for _, tags := range bigmap {
 		makexml(tags)
 	}
 
