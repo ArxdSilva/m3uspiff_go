@@ -3,6 +3,8 @@ package xspf
 import (
 	"bytes"
 	"encoding/xml"
+	"fmt"
+	"os"
 )
 
 var Output bytes.Buffer
@@ -24,12 +26,12 @@ func Makexml(tags map[string]string) {
 		Album:    tags["album"],
 	}
 	Output.WriteString("\n")
-	newoutput, _ := xml.MarshalIndent(values, "  ", "    ")
+	newoutput, err := xml.MarshalIndent(values, "  ", "    ")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 	Output.Write(newoutput)
-	//Output = (Output + newoutput)
-
-	//(Output, _ = xml.MarshalIndent(values, "  ", "    "))
 
 	return
-	//fmt.Println(string(output))
 }

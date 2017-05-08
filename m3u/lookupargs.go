@@ -1,6 +1,7 @@
 package m3u
 
 import (
+	//"fmt"
 	"github.com/dhowden/tag"
 	"os"
 	"strconv"
@@ -8,7 +9,7 @@ import (
 
 var entries = 0
 
-func Lookupargs(line string, err error, bigmap map[string]map[string]string) {
+func Lookupargs(line string, bigmap map[string]map[string]string) {
 	tags := make(map[string]string)
 	tags["entry"] = strconv.Itoa(entries)
 	tags["location"] = line
@@ -17,9 +18,9 @@ func Lookupargs(line string, err error, bigmap map[string]map[string]string) {
 	tagf, err2 := tag.ReadFrom(file)
 	if err1 != nil || err2 != nil {
 		if err1 != nil {
-			err = err1
+			//fmt.Println(err1)
 		} else {
-			err = err2
+			//fmt.Println(err2)
 		}
 		end(tags, bigmap)
 		return

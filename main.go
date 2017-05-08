@@ -8,52 +8,28 @@ import (
 	"os"
 )
 
-var err error
-var file *os.File
 var bigmap = make(map[string]map[string]string)
-
-func command() {
-	if len(os.Args) != 2 {
-		err = errors.New("m3uspiff takes exactly ONE argument")
-		return
-	}
-	file, err = os.Open(os.Args[1])
-}
 
 func main() {
 
-	command()
-
-	if err != nil {
-		errorh(err)
+	if len(os.Args) != 2 {
+		err := errors.New("m3uspiff takes exactly ONE argument")
+		fmt.Println(err)
+		os.Exit(1)
 	}
 
-	m3u.Parsem3u(file)
+	file, err := os.Open(os.Args[1])
+	if err == nil {
+		m3u.Parsem3u(file)
 
-	if err != nil {
-		errorh(err)
-	}
-
-	for _, line := range m3u.Lines {
-		m3u.Lookupargs(line, err, bigmap)
-	}
-
-	if err != nil {
-		println(err)
+		for _, line := range m3u.Lines {
+			m3u.Lookupargs(line, bigmap)
+		}
 	}
 
 	for _, tags := range bigmap {
 		xspf.Makexml(tags)
 	}
 
-	if err != nil {
-		errorh(err)
-	}
-
 	fmt.Println(xspf.Output.String())
-}
-
-func errorh(err error) {
-	fmt.Println(err)
-	os.Exit(1)
 }
