@@ -8,14 +8,14 @@ import (
 )
 
 func lookupargs(line string) {
-	file, err := os.Open(line)
-	if err != nil {
-		//fmt.Println(err)
-		return
-	}
-	tagf, err := tag.ReadFrom(file)
-	if err != nil {
-		//fmt.Println(err)
+	file, err1 := os.Open(line)
+	tagf, err2 := tag.ReadFrom(file)
+	if err1 != nil || err2 != nil {
+		if err1 != nil {
+			err = err1
+		} else {
+			err = err2
+		}
 		return
 	}
 	creator := tagf.Artist()

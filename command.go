@@ -1,13 +1,16 @@
 package main
 
 import (
+	"errors"
 	"os"
 )
 
-var err = 0
+var err error
+var file *os.File
 
 func command() {
 	if len(os.Args) != 2 {
-		err = 1
+		err = errors.New("m3uspiff takes exactly ONE argument")
 	}
+	file, err = os.Open(os.Args[1])
 }
