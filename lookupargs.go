@@ -1,23 +1,27 @@
 package main
 
 import (
+	"fmt"
 	"github.com/dhowden/tag"
-	"log"
 	"os"
+	"strconv"
 )
 
 func lookupargs(line string) {
-	//println(line)
 	file, err := os.Open(line)
 	if err != nil {
-		//log.Print(err)
+		//fmt.Println(err)
 		return
 	}
-	tags, err := tag.ReadFrom(file)
+	tagf, err := tag.ReadFrom(file)
 	if err != nil {
-		log.Print(err)
+		//fmt.Println(err)
 		return
 	}
-	println(tags.Title())
-
+	creator := tagf.Artist()
+	album := tagf.Album()
+	title := tagf.Title()
+	trackNum, _ := tagf.Track()
+	tags := []string{creator, album, title, strconv.Itoa(trackNum)}
+	fmt.Println(tags)
 }

@@ -8,4 +8,10 @@ Sample.mp3
 Greatest Hits\Example.ogg
 
 #EXTINF:321,Example Artist - Example title
-/Volumes/extDISK/music/Coldplay/Parachutes/01 Don't Panic.mp3
+#/Volumes/extDISK/music/Coldplay/Parachutes/01 Don't Panic.mp3
+
+#EXTINF:321,Example Artist - Example title
+/Users/Conor/Music/twenty one pilots/[non-album tracks]/00 Two.mp3
+
+#EXTINF:321,Example Artist - Example title
+/Users/Conor/Music/twenty one pilots/[non-album tracks]/Drown.flac
