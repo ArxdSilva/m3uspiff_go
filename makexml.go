@@ -1,9 +1,10 @@
 package main
 
 import (
-//"encoding/xml"
+	//"encoding/xml"
+	"fmt"
 )
 
-func makexml() {
-
+func makexml(tags string) {
+	fmt.Println(tags)
 }

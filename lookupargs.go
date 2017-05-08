@@ -1,11 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"github.com/dhowden/tag"
 	"os"
 	"strconv"
 )
+
+var tags []string
 
 func lookupargs(line string) {
 	file, err1 := os.Open(line)
@@ -18,10 +19,11 @@ func lookupargs(line string) {
 		}
 		return
 	}
+
 	creator := tagf.Artist()
 	album := tagf.Album()
 	title := tagf.Title()
 	trackNum, _ := tagf.Track()
-	tags := []string{creator, album, title, strconv.Itoa(trackNum)}
-	fmt.Println(tags)
+	tags = []string{creator, album, title, strconv.Itoa(trackNum)}
+	return
 }
