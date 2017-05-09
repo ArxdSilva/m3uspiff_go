@@ -2,10 +2,10 @@
 #EXTM3U
 
 #EXTINF:123, Sample artist - Sample title
-Sample.mp3
+#Sample.mp3
 
 #EXTINF:321,Example Artist - Example title
-Greatest Hits\Example.ogg
+#Greatest Hits\Example.ogg
 
 #EXTINF:321,Example Artist - Example title
 #/Volumes/extDISK/music/Coldplay/Parachutes/01 Don't Panic.mp3

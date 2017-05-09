@@ -19,6 +19,7 @@ func main() {
 	}
 
 	file, err := os.Open(os.Args[1])
+
 	if err == nil {
 		m3u.Parsem3u(file)
 
@@ -27,9 +28,7 @@ func main() {
 		}
 	}
 
-	for _, tags := range bigmap {
-		xspf.Makexml(tags)
-	}
+	xspf.Makexml(bigmap)
 
-	fmt.Println(xspf.Output.String())
+	//fmt.Println(xspf.Output.String())
 }
