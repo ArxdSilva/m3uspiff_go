@@ -20,18 +20,21 @@ func main() {
 		os.Exit(1)
 	}
 
-	file, _ := os.Open(os.Args[1])
+	file, err := os.Open(os.Args[1])
+	if err != nil {
+		panic(err)
+	}
 	m3u.Parsem3u(file)
 	for _, line := range m3u.Lines {
-		entry, err := m3u.Lookupargs(line)
-		if err != nil {
-			panic(err)
+		entry, errLookup := m3u.Lookupargs(line)
+		if errLookup != nil {
+			panic(errLookup)
 		}
 		trackMap[strconv.Itoa(entries)] = entry
 		entries++
 	}
 
-	err := xspf.Makexml(trackMap)
+	err = xspf.Makexml(trackMap)
 	if err != nil {
 		panic(err)
 	}
