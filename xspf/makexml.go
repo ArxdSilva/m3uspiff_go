@@ -4,64 +4,32 @@ import (
 	"bytes"
 	"encoding/xml"
 	"fmt"
-	"os"
+
+	"github.com/ibrokemypie/m3uspiff_go/m3u"
 )
 
 type playlist struct {
-	Tracklist *tracklist `xml:"tracklist"`
-	Version   int        `xml:"version,attr"`
-	Xmlns     string     `xml:"xmlns,attr"`
-}
-
-type tracklist struct {
-	Track *track `xml:"track"`
-}
-
-type track struct {
-	XMLName  xml.Name `xml:"track"`
-	Location string   `xml:"location"`
-	Title    string   `xml:"title,omitempty"`
-	TrackNum string   `xml:"trackNum,omitempty"`
-	Creator  string   `xml:"creator,omitempty"`
-	Album    string   `xml:"album,omitempty"`
+	Tracklist map[string]*m3u.Track `xml:"tracklist"`
+	Version   int                   `xml:"version,attr"`
+	Xmlns     string                `xml:"xmlns,attr"`
 }
 
 var Output bytes.Buffer
-var value xml.CharData
-var entries *track
-var Tracklist *tracklist
 
-func Makexml(tags map[string]map[string]string) {
-	for _, entry := range tags {
-		entries = &track{
-			Location: entry["location"],
-			Title:    entry["title"],
-			TrackNum: entry["trackNum"],
-			Creator:  entry["creator"],
-			Album:    entry["album"],
-		}
-		//value, _ = xml.MarshalIndent(entries, " ", "  ")
-		//Output.Write(value)
-		Tracklist = &tracklist{
-			Track: entries,
-		}
-	}
-
+func Makexml(trackMap map[string]*m3u.Track) error {
 	Output.WriteString(xml.Header)
-
 	final := &playlist{
 		Version:   1,
 		Xmlns:     "http://xspf.org/ns/0/",
-		Tracklist: Tracklist,
+		Tracklist: trackMap,
 	}
 
 	oops, err := xml.MarshalIndent(final, "  ", "    ")
-	Output.Write(oops)
-	println(Output.String())
-
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		return err
 	}
-	return
+
+	Output.Write(oops)
+	fmt.Println(Output.String())
+	return err
 }

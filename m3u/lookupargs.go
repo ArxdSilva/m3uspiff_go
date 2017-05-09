@@ -1,46 +1,47 @@
 package m3u
 
 import (
-	//"fmt"
-	"github.com/dhowden/tag"
 	"os"
 	"strconv"
+
+	"github.com/dhowden/tag"
 )
+
+type Track struct {
+	Creator  string `xml:"creator,omitempty"`
+	Album    string `xml:"album,omitempty"`
+	Title    string `xml:"title,omitempty"`
+	TrackNum string `xml:"trackNum,omitempty"`
+	Location string `xml:"location"`
+	Entry    string
+}
 
 var entries = 0
 
-func Lookupargs(line string, bigmap map[string]map[string]string) {
-	tags := make(map[string]string)
-	tags["entry"] = strconv.Itoa(entries)
-	tags["location"] = line
-
-	file, err1 := os.Open(line)
-	tagf, err2 := tag.ReadFrom(file)
-	if err1 != nil || err2 != nil {
-		if err1 != nil {
-			//fmt.Println(err1)
-		} else {
-			//fmt.Println(err2)
-		}
-		end(tags, bigmap)
-		return
+func Lookupargs(line string) (*Track, error) {
+	file, err := os.Open(line)
+	if err != nil {
+		return nil, err
 	}
-
-	artist := tagf.Artist()
-	album := tagf.Album()
-	title := tagf.Title()
+	tagf, err := tag.ReadFrom(file)
+	if err != nil {
+		return nil, err
+	}
 	track, _ := tagf.Track()
-
-	tags["creator"] = artist
-	tags["album"] = album
-	tags["title"] = title
-	tags["trackNum"] = strconv.Itoa(track)
-
-	end(tags, bigmap)
+	entry := Track{
+		Creator:  tagf.Artist(),
+		Album:    tagf.Album(),
+		Title:    tagf.Title(),
+		TrackNum: strconv.Itoa(track),
+		Entry:    strconv.Itoa(entries),
+		Location: line,
+	}
+	entries++
+	return &entry, err
 }
 
 func end(tags map[string]string, bigmap map[string]map[string]string) {
 	bigmap[strconv.Itoa(entries)] = tags
-	entries++
+
 	return
 }
