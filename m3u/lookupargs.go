@@ -39,9 +39,3 @@ func Lookupargs(line string) (*Track, error) {
 	entries++
 	return &entry, err
 }
-
-func end(tags map[string]string, bigmap map[string]map[string]string) {
-	bigmap[strconv.Itoa(entries)] = tags
-
-	return
-}
